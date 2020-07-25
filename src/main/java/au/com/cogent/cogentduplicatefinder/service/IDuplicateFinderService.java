@@ -6,7 +6,7 @@ import java.util.Map;
 
 public interface IDuplicateFinderService {
 
-	List<String> getFilePathsWithDuplicates(
+	void getFilePathsWithDuplicates(
 			Map<String, List<String>> fileList, File directory);
 	
 }
