@@ -105,7 +105,7 @@ public class DuplicateFinderServiceImplTest {
 	 * 
 	 */
 	@Test
-	public void sameDirectoryWithNoDuplicates() {
+	public void testSameDirectoryWithNoDuplicates() {
 		
 		Map<String, List<String>> lists = new HashMap<String, List<String>>();
 
@@ -140,7 +140,7 @@ public class DuplicateFinderServiceImplTest {
 	 * 
 	 */
 	@Test
-	public void multipleDirectoriesWithMultipleDuplicates() {
+	public void testMultipleDirectoriesWithMultipleDuplicates() {
 		
 		Map<String, List<String>> lists = new HashMap<String, List<String>>();
 
@@ -186,7 +186,7 @@ public class DuplicateFinderServiceImplTest {
 	 * 
 	 */
 	@Test
-	public void multipleDirectoriesWithNoDuplicates() {
+	public void testMultipleDirectoriesWithNoDuplicates() {
 		
 		Map<String, List<String>> lists = new HashMap<String, List<String>>();
 
@@ -221,7 +221,7 @@ public class DuplicateFinderServiceImplTest {
 	 * 
 	 */
 	@Test
-	public void sameLevelMultipleDirectoriesWithNoDuplicates() {
+	public void testSameLevelMultipleDirectoriesWithNoDuplicates() {
 		
 		Map<String, List<String>> lists = new HashMap<String, List<String>>();
 
@@ -256,7 +256,7 @@ public class DuplicateFinderServiceImplTest {
 	 * 
 	 */
 	@Test
-	public void sameLevelMultipleDirectoriesWithMultipleDuplicates() {
+	public void testSameLevelMultipleDirectoriesWithMultipleDuplicates() {
 		
 		Map<String, List<String>> lists = new HashMap<String, List<String>>();
 
@@ -304,11 +304,29 @@ public class DuplicateFinderServiceImplTest {
 	 * 
 	 */
 	@Test
-	public void singleDirectoryWithNoFiles() {
+	public void testSingleDirectoryWithNoFiles() {
 		
 		Map<String, List<String>> lists = new HashMap<String, List<String>>();
 
 		File directory = new File("src/test/resources/singleEmptyDirectory");
+
+		duplicateFinder.getFilePathsWithDuplicates(lists, directory);
+
+		//list size shoulb be 0 as there are no files in the directory
+		assertThat(lists.size(), is(0));
+		
+	}
+	
+	/**
+	 * Test case to test a single directory with no files
+	 * 
+	 */
+	@Test
+	public void testEmptyChildDirectoryWithNoFiles() {
+		
+		Map<String, List<String>> lists = new HashMap<String, List<String>>();
+
+		File directory = new File("src/test/resources/emptyChildDirectory");
 
 		duplicateFinder.getFilePathsWithDuplicates(lists, directory);
 
