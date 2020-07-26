@@ -215,5 +215,40 @@ public class DuplicateFinderServiceImplTest {
 		assertTrue(listWithDuplicates.isEmpty());
 		
 	}
+	
+	/**
+	 * Test case to test no duplicates in the same level multiple directories
+	 * 
+	 */
+	@Test
+	public void sameLevelMultipleDirectoriesWithNoDuplicates() {
+		
+		Map<String, List<String>> lists = new HashMap<String, List<String>>();
+
+		File directory = new File("src/test/resources/sameLevelMultipleDirectoriesWithNoDuplicates");
+
+		duplicateFinder.getFilePathsWithDuplicates(lists, directory);
+
+		//4 lists should be there. One each for a particular image because there are no
+		//duplicates
+		assertThat(lists.size(), is(4));
+
+		List<String> listWithDuplicates = new ArrayList<>();
+		
+		for (List<String> list : lists.values()) {
+
+			if (list.size() > 1) {
+
+				//Putting the duplicates into the listWithDuplicates
+				list.stream().forEach(item -> listWithDuplicates.add(item));
+
+			}
+
+		}
+		
+		//Confirm there are no duplicates
+		assertTrue(listWithDuplicates.isEmpty());
+		
+	}
 
 }
