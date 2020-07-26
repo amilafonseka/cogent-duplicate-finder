@@ -25,11 +25,12 @@ public class DuplicateFinderInputValidationServiceImpl implements IDuplicateFind
 	
 	private void checkNullAndEmpty(String argument) 
 			throws ArgumentFormatException {
+		
 		if(argument == null) {
-			throw new ArgumentFormatException("Transaction text is NULL");
+			throw new ArgumentFormatException("Argument text is NULL");
 		
 		} else if(argument.isEmpty()) {
-			throw new ArgumentFormatException("Transaction text is empty");
+			throw new ArgumentFormatException("Argument text is empty");
 		}
 	}
 
