@@ -13,6 +13,7 @@ import org.junit.Test;
 
 /**
  * This class contains all test cases for testing
+ * {@link au.com.cogent.cogentduplicatefinder.service.DuplicateFinderServiceImpl}
  * 
  * @author amilasembunaidelage
  *
