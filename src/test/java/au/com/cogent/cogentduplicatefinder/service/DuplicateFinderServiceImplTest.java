@@ -20,69 +20,77 @@ import org.junit.Test;
 public class DuplicateFinderServiceImplTest {
 
 	DuplicateFinderServiceImpl duplicateFinder = new DuplicateFinderServiceImpl();
-	
+
+	/**
+	 * Test case to test one duplicate in the same directory
+	 *
+	 */
 	@Test
 	public void testSameDirectoryWithOneDuplicate() {
-		
+
 		Map<String, List<String>> lists = new HashMap<String, List<String>>();
-		
+
 		File directory = new File("src/test/resources/sameDirectoryWithOneDuplicate");
-		
+
 		duplicateFinder.getFilePathsWithDuplicates(lists, directory);
-		
+
 		assertThat(lists.size(), is(2));
-		
-		for ( List<String> list : lists.values()) {
-			
-			if ( list.size() > 1 ) {
-				
-				assertTrue(list.stream().anyMatch(item -> 
-					item.endsWith("src/test/resources/sameDirectoryWithOneDuplicate/s-08369.jpg")));
-				
-				assertTrue(list.stream().anyMatch(item -> 
-					item.endsWith("src/test/resources/sameDirectoryWithOneDuplicate/quite a view.jpg")));
-				
+
+		for (List<String> list : lists.values()) {
+
+			if (list.size() > 1) {
+
+				assertTrue(list.stream().anyMatch(
+						item -> item.endsWith("src/test/resources/sameDirectoryWithOneDuplicate/s-08369.jpg")));
+
+				assertTrue(list.stream().anyMatch(
+						item -> item.endsWith("src/test/resources/sameDirectoryWithOneDuplicate/quite a view.jpg")));
+
 			}
-			
+
 		}
-		
+
 	}
-	
+
+	/**
+	 * Test case to test multiple duplicates in the same directory
+	 * 
+	 */
 	@Test
 	public void testSameDirectoryWithMultipleDuplicates() {
-		
-		Map<String, List<String>> lists = new HashMap<String, List<String>>();
-		
-		File directory = new File("src/test/resources/sameDirectoryWithMultipleDuplicates");
-		
-		duplicateFinder.getFilePathsWithDuplicates(lists, directory);
-		
-		assertThat(lists.size(), is(3));
-		
-		List<String> listWithDuplicates = new ArrayList<>();
-		
-		for ( List<String> list : lists.values()) {
-			
-			if ( list.size() > 1 ) {
-				
-				list.stream().forEach(item -> listWithDuplicates.add(item));
-				
-			}
-			
-		}
-		
-		assertTrue(listWithDuplicates.stream().anyMatch(item -> 
-			item.endsWith("src/test/resources/sameDirectoryWithMultipleDuplicates/s-08369.jpg")));
-	
-		assertTrue(listWithDuplicates.stream().anyMatch(item -> 
-			item.endsWith("src/test/resources/sameDirectoryWithMultipleDuplicates/quite a view.jpg")));
-	
-		assertTrue(listWithDuplicates.stream().anyMatch(item -> 
-			item.endsWith("src/test/resources/sameDirectoryWithMultipleDuplicates/s-37293.jpg")));
 
-		assertTrue(listWithDuplicates.stream().anyMatch(item -> 
-			item.endsWith("src/test/resources/sameDirectoryWithMultipleDuplicates/that starfish again.jpg")));
-		
+		Map<String, List<String>> lists = new HashMap<String, List<String>>();
+
+		File directory = new File("src/test/resources/sameDirectoryWithMultipleDuplicates");
+
+		duplicateFinder.getFilePathsWithDuplicates(lists, directory);
+
+		assertThat(lists.size(), is(3));
+
+		List<String> listWithDuplicates = new ArrayList<>();
+
+		for (List<String> list : lists.values()) {
+
+			if (list.size() > 1) {
+
+				list.stream().forEach(item -> listWithDuplicates.add(item));
+
+			}
+
+		}
+
+		assertTrue(listWithDuplicates.stream()
+				.anyMatch(item -> item.endsWith("src/test/resources/sameDirectoryWithMultipleDuplicates/s-08369.jpg")));
+
+		assertTrue(listWithDuplicates.stream().anyMatch(
+				item -> item.endsWith("src/test/resources/sameDirectoryWithMultipleDuplicates/quite a view.jpg")));
+
+		assertTrue(listWithDuplicates.stream()
+				.anyMatch(item -> item.endsWith("src/test/resources/sameDirectoryWithMultipleDuplicates/s-37293.jpg")));
+
+		assertTrue(listWithDuplicates.stream().anyMatch(item -> item
+				.endsWith("src/test/resources/sameDirectoryWithMultipleDuplicates/that starfish again.jpg")));
+
 	}
 
 }
