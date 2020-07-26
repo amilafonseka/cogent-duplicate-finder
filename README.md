@@ -47,3 +47,7 @@ Unzip the resource bundle(project bundle) and import to your preferred IDE (with
 
 In terminal, go to project directory where the ```POM``` file is and run ```mvn clean install package```
 
+Go to ```target``` directory in the same project directory and run ```java -jar cogentduplicatefinder-0.0.1-SNAPSHOT.jar IMAGES_DIRECTORY_PATH``` 
+
+You will see a list of duplicates in the console.
+
