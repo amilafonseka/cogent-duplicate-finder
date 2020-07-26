@@ -1,5 +1,7 @@
 package au.com.cogent.cogentduplicatefinder.service;
 
+import java.io.File;
+
 import au.com.cogent.cogentduplicatefinder.exception.ArgumentFormatException;
 
 /**
@@ -17,21 +19,35 @@ public class DuplicateFinderInputValidationServiceImpl implements IDuplicateFind
 	 * @throws ArgumentFormatException
 	 */
 	@Override
-	public void validateDuplicateFinderArgumentInput(String argument) throws ArgumentFormatException {
+	public void validateDuplicateFinderArgumentInput(String[] arguments) throws ArgumentFormatException {
 		
-		checkNullAndEmpty(argument);
+		checkArgumentsLength(arguments);
+		checkThePathIsADirectory(arguments);
 
 	}
 	
-	private void checkNullAndEmpty(String argument) 
+	private void checkArgumentsLength(String[] arguments) 
 			throws ArgumentFormatException {
 		
-		if(argument == null) {
-			throw new ArgumentFormatException("Argument text is NULL");
+		if (arguments.length < 1) {
 		
-		} else if(argument.isEmpty()) {
-			throw new ArgumentFormatException("Argument text is empty");
+			throw new ArgumentFormatException("Please enter a directory path");
+		
 		}
+		
+	}
+	
+	private void checkThePathIsADirectory(String[] arguments) 
+			throws ArgumentFormatException {
+		
+		File directory = new File(arguments[0]);
+		
+		if(!directory.isDirectory()) {
+			
+			throw new ArgumentFormatException("Entered directory does not exist");
+			
+		}
+		
 	}
 
 }
