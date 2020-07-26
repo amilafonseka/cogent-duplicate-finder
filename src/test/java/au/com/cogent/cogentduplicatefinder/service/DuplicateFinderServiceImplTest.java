@@ -250,5 +250,53 @@ public class DuplicateFinderServiceImplTest {
 		assertTrue(listWithDuplicates.isEmpty());
 		
 	}
+	
+	/**
+	 * Test case to test multiple duplicates in same level multiple directories
+	 * 
+	 */
+	@Test
+	public void sameLevelMultipleDirectoriesWithMultipleDuplicates() {
+		
+		Map<String, List<String>> lists = new HashMap<String, List<String>>();
+
+		File directory = new File("src/test/resources/sameLevelMultipleDirectoriesWithMultipleDuplicates");
+
+		duplicateFinder.getFilePathsWithDuplicates(lists, directory);
+
+		//3 lists should be there. Two for duplicates and one for non-duplicate image
+		assertThat(lists.size(), is(3));
+
+		List<String> listWithDuplicates = new ArrayList<>();
+		
+		for (List<String> list : lists.values()) {
+
+			if (list.size() > 1) {
+
+				//Putting the duplicates into the listWithDuplicates
+				list.stream().forEach(item -> listWithDuplicates.add(item));
+
+			}
+
+		}
+		
+		//Check in the listWithDuplicates for the 2 duplicates
+		assertTrue(listWithDuplicates.stream()
+				.anyMatch(item -> item.endsWith("src/test/resources/"
+						+ "sameLevelMultipleDirectoriesWithMultipleDuplicates/sameLevelDirectory1/s-08369.jpg")));
+
+		assertTrue(listWithDuplicates.stream().anyMatch(
+				item -> item.endsWith("src/test/resources/"
+						+ "sameLevelMultipleDirectoriesWithMultipleDuplicates/sameLevelDirectory1/quite a view.jpg")));
+
+		assertTrue(listWithDuplicates.stream()
+				.anyMatch(item -> item.endsWith("src/test/resources/sameLevelMultipleDirectoriesWithMultipleDuplicates/"
+						+ "sameLevelDirectory2/s-37293.jpg")));
+
+		assertTrue(listWithDuplicates.stream().anyMatch(item -> item
+				.endsWith("src/test/resources/sameLevelMultipleDirectoriesWithMultipleDuplicates/"
+						+ "sameLevelDirectory2/that starfish again.jpg")));
+		
+	}
 
 }
