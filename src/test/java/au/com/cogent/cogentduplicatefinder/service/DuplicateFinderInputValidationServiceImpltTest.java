@@ -20,22 +20,28 @@ public class DuplicateFinderInputValidationServiceImpltTest {
 			new DuplicateFinderInputValidationServiceImpl();
 	
 	@Test
-	public void testValidateArgumentInput_Null() {
+	public void testValidateArgumentInput_noArguments() {
+		
+		String[] arguments = new String[0];
 		
 		Throwable exception = assertThrows(ArgumentFormatException.class, 
-				() -> validationService.validateDuplicateFinderArgumentInput(null));
+				() -> validationService.validateDuplicateFinderArgumentInput(arguments));
 		
-		assertEquals("Argument text is NULL", exception.getMessage());
+		assertEquals("Please enter a directory path", exception.getMessage());
 		
 	}
 	
 	@Test
-	public void testValidateArgumentInput_Empty() {
+	public void testGivenPathIsADirectory() {
 		
-		Throwable exception = assertThrows(ArgumentFormatException.class,
-				() -> validationService.validateDuplicateFinderArgumentInput(""));
+		String[] arguments = new String[1];
 		
-		assertEquals("Argument text is empty", exception.getMessage());
+		arguments[0] = "src/test/resources/sameDirectoryWithOneDuplicate/s-08369.jpg";
+		
+		Throwable exception = assertThrows(ArgumentFormatException.class, 
+				() -> validationService.validateDuplicateFinderArgumentInput(arguments));
+		
+		assertEquals("Entered directory does not exist", exception.getMessage());
 		
 	}
 
