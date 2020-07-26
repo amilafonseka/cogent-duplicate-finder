@@ -298,5 +298,23 @@ public class DuplicateFinderServiceImplTest {
 						+ "sameLevelDirectory2/that starfish again.jpg")));
 		
 	}
+	
+	/**
+	 * Test case to test a single directory with no files
+	 * 
+	 */
+	@Test
+	public void singleDirectoryWithNoFiles() {
+		
+		Map<String, List<String>> lists = new HashMap<String, List<String>>();
+
+		File directory = new File("src/test/resources/singleEmptyDirectory");
+
+		duplicateFinder.getFilePathsWithDuplicates(lists, directory);
+
+		//list size shoulb be 0 as there are no files in the directory
+		assertThat(lists.size(), is(0));
+		
+	}
 
 }
