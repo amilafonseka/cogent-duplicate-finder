@@ -8,7 +8,7 @@ import au.com.cogent.cogentduplicatefinder.exception.ArgumentFormatException;
  * @author amilasembunaidelage
  *
  */
-public class DuplicateFinderInputValidationService implements IDuplicateFinderInputValidationService {
+public class DuplicateFinderInputValidationServiceImpl implements IDuplicateFinderInputValidationService {
 
 	/**
 	 * Validates the arguments input
