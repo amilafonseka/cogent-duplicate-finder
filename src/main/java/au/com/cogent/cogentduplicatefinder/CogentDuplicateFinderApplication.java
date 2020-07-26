@@ -5,6 +5,8 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import au.com.cogent.cogentduplicatefinder.exception.ArgumentFormatException;
+import au.com.cogent.cogentduplicatefinder.service.DuplicateFinderInputValidationServiceImpl;
 import au.com.cogent.cogentduplicatefinder.service.DuplicateFinderServiceImpl;
 
 /**
@@ -20,23 +22,22 @@ public class CogentDuplicateFinderApplication {
 		DuplicateFinderServiceImpl duplicateFinder = 
 				new DuplicateFinderServiceImpl();
 		
-		if (args.length < 1) {
+		DuplicateFinderInputValidationServiceImpl validationService = 
+				new DuplicateFinderInputValidationServiceImpl();
+
+		try {
 			
-			System.out.println("Please enter a directory path");
+			validationService.validateDuplicateFinderArgumentInput(args);
+			
+		} catch (ArgumentFormatException e) {
+			
+			System.out.println(e.getMessage());
 			return;
-			
 		}
 		
 		File directory = new File(args[0]);
 		
-		if(!directory.isDirectory()) {
-			
-			System.out.println("Entered directory does not exist");
-			return;
-			
-		}
-		
-		Map<String, List<String>> lists = new HashMap<String, List<String>>();
+		Map<String, List<String>> lists = new HashMap<>();
 		
 		duplicateFinder.getFilePathsWithDuplicates(lists, directory);
 		
