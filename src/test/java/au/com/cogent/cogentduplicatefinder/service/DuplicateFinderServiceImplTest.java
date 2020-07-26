@@ -334,5 +334,23 @@ public class DuplicateFinderServiceImplTest {
 		assertThat(lists.size(), is(0));
 		
 	}
+	
+	/**
+	 * Test case to test same level multiple directories with no files
+	 * 
+	 */
+	@Test
+	public void testSameLevelMultipleDirectoriesWithNoFiles() {
+		
+		Map<String, List<String>> lists = new HashMap<String, List<String>>();
+
+		File directory = new File("src/test/resources/sameLevelMultipleDirectoriesWithNoFiles");
+
+		duplicateFinder.getFilePathsWithDuplicates(lists, directory);
+
+		//list size shoulb be 0 as there are no files in the directory
+		assertThat(lists.size(), is(0));
+		
+	}
 
 }
