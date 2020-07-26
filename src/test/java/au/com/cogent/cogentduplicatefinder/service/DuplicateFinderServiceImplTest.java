@@ -34,12 +34,15 @@ public class DuplicateFinderServiceImplTest {
 
 		duplicateFinder.getFilePathsWithDuplicates(lists, directory);
 
+		//Only 2 lists should be there
+		//One containing the duplicates and the one containing the non-duplicate
 		assertThat(lists.size(), is(2));
 
 		for (List<String> list : lists.values()) {
 
 			if (list.size() > 1) {
 
+				//Checking whether the list contains the duplicates
 				assertTrue(list.stream().anyMatch(
 						item -> item.endsWith("src/test/resources/sameDirectoryWithOneDuplicate/s-08369.jpg")));
 
@@ -65,6 +68,8 @@ public class DuplicateFinderServiceImplTest {
 
 		duplicateFinder.getFilePathsWithDuplicates(lists, directory);
 
+		//Only 3 lists should be there
+		//Two lists containing the duplicates and the remaining one containing the non-duplicate
 		assertThat(lists.size(), is(3));
 
 		List<String> listWithDuplicates = new ArrayList<>();
@@ -73,12 +78,14 @@ public class DuplicateFinderServiceImplTest {
 
 			if (list.size() > 1) {
 
+				//Putting the duplicates into the listWithDuplicates
 				list.stream().forEach(item -> listWithDuplicates.add(item));
 
 			}
 
 		}
 
+		//Check in the listWithDuplicates for the 2 duplicates
 		assertTrue(listWithDuplicates.stream()
 				.anyMatch(item -> item.endsWith("src/test/resources/sameDirectoryWithMultipleDuplicates/s-08369.jpg")));
 
