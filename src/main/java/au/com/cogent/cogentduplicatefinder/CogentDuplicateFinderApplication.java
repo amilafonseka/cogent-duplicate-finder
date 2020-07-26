@@ -41,6 +41,8 @@ public class CogentDuplicateFinderApplication {
 		
 		duplicateFinder.getFilePathsWithDuplicates(lists, directory);
 		
+		System.out.println("-------------------Duplicates-------------------");
+		
 		for ( List<String> list : lists.values()) {
 			
 			if ( list.size() > 1 ) {
