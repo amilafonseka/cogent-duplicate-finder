@@ -25,7 +25,7 @@ public class DuplicateFinderServiceImplTest {
 		
 		Map<String, List<String>> lists = new HashMap<String, List<String>>();
 		
-		File directory = new File("src/test/resources");
+		File directory = new File("src/test/resources/sameDirectoryWithOneDuplicate");
 		
 		duplicateFinder.getFilePathsWithDuplicates(lists, directory);
 		
