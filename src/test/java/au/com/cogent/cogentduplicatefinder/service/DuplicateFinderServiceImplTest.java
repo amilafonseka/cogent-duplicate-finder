@@ -4,6 +4,7 @@ import static org.hamcrest.CoreMatchers.is;
 import static org.junit.Assert.*;
 
 import java.io.File;
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -44,6 +45,43 @@ public class DuplicateFinderServiceImplTest {
 			}
 			
 		}
+		
+	}
+	
+	@Test
+	public void testSameDirectoryWithMultipleDuplicates() {
+		
+		Map<String, List<String>> lists = new HashMap<String, List<String>>();
+		
+		File directory = new File("src/test/resources/sameDirectoryWithMultipleDuplicates");
+		
+		duplicateFinder.getFilePathsWithDuplicates(lists, directory);
+		
+		assertThat(lists.size(), is(3));
+		
+		List<String> listWithDuplicates = new ArrayList<>();
+		
+		for ( List<String> list : lists.values()) {
+			
+			if ( list.size() > 1 ) {
+				
+				list.stream().forEach(item -> listWithDuplicates.add(item));
+				
+			}
+			
+		}
+		
+		assertTrue(listWithDuplicates.stream().anyMatch(item -> 
+			item.endsWith("src/test/resources/sameDirectoryWithMultipleDuplicates/s-08369.jpg")));
+	
+		assertTrue(listWithDuplicates.stream().anyMatch(item -> 
+			item.endsWith("src/test/resources/sameDirectoryWithMultipleDuplicates/quite a view.jpg")));
+	
+		assertTrue(listWithDuplicates.stream().anyMatch(item -> 
+			item.endsWith("src/test/resources/sameDirectoryWithMultipleDuplicates/s-37293.jpg")));
+
+		assertTrue(listWithDuplicates.stream().anyMatch(item -> 
+			item.endsWith("src/test/resources/sameDirectoryWithMultipleDuplicates/that starfish again.jpg")));
 		
 	}
 
