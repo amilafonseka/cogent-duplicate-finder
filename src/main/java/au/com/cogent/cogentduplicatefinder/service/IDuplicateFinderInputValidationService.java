@@ -10,7 +10,7 @@ import au.com.cogent.cogentduplicatefinder.exception.ArgumentFormatException;
  */
 public interface IDuplicateFinderInputValidationService {
 
-	void validateDuplicateFinderArgumentInput(String argument)
+	void validateDuplicateFinderArgumentInput(String[] argument)
 		throws ArgumentFormatException;
 	
 }
